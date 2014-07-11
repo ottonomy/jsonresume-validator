@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
-	"id": "http://jsonresume.org/resume-schema-v0.1#",
+	"id": "http://jsonresume.org/resume-schema-v0.1.json",
 	"description":"An employment resume in structured data.",
 	"definitions": {
 		"Bio": {
@@ -52,8 +52,8 @@
 				"company": { "type": "string" },
 				"position": { "type": "string" },
 				"website": { "type": "string", "format": "uri" },
-				"startDate": { "$ref": "#/definitions/ISODateTime" },
-				"endDate": { "$ref": "#/definitions/ISODateTime" },
+				"startDate": { "$ref": "#/definitions/ISODate" },
+				"endDate": { "$ref": "#/definitions/ISODate" },
 				"summary": { "type": "string" },
 				"highlights":{ 
 					"description": "An array of highlights describing this work experience.",
@@ -65,10 +65,11 @@
 		"ISODate": {
       "description": "ISO 8601 date format string yyyy-MM-dd",
       "allOf": { "type": "string" },
-      "oneOf": [
+      "anyOf": [
         { "pattern": "^\\d{4}-[01]\\d-[0-3]\\d$" },
         { "pattern": "^\\d{4}-[01]\\d$" },
-        { "pattern": "^\\d{4}$" }
+        { "pattern": "^\\d{4}$" },
+        { "pattern": "^[Pp]resent$" }
       ]
     },
     "EducationExperience": {

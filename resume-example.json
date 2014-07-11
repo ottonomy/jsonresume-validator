@@ -1,0 +1,50 @@
+{
+  "bio": {
+    "firstName": "Bill",
+    "lastName": "Weasel",
+    "email": {
+      "personal": "bill@trueweasels.net"
+    },
+    "phone": {
+      "work": "",
+      "personal": "1-555-555-5555"
+    },
+    "summary": "A swell fellow. A swellow, you might say.",
+    "location": {
+      "city": "Anywhere",
+      "countryCode": "United States",
+      "state": "Illinois"
+    },
+    "websites": {
+      "homepage": "http://trueweasels.net"
+    },
+    "profiles": {
+      "twitter": "awesomebill"
+    }
+  },
+  "work": [
+    {
+      "company": "Work, Inc",
+      "position": "Project Manager",
+      "website": "http://workinc.com",
+      "startDate": "2013-07-01",
+      "endDate": "Present",
+      "summary": "Breathed life into the business.",
+      "highlights": [
+        "Serious project #5"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Illinois",
+      "startDate": "2001-09",
+      "endDate": "2008-06",
+      "area": "Used Car Salesmanship",
+      "studyType": "B.S.",
+      "courses": [
+        "CX099 - Coolness Studies"
+      ]
+    }
+  ]
+}
