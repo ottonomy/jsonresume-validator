@@ -1,0 +1,154 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://jsonresume.org/resume-schema-v0.1#",
+	"description":"An employment resume in structured data.",
+	"definitions": {
+		"Bio": {
+			"description": "Biographical information on a Person",
+			"type": "object",
+			"properties":{
+				"firstName": { "type": "string" },
+				"lastName": { "type": "string" },
+				"email": {
+					"description": "A collection of email addresses labeled by their context, like personal or work.",
+					"type": "object",
+					"additionalProperties": { "type": "string", "format": "email" }
+				},
+				"phone": {
+					"description": "A collection of telephone numbers labeled by their context, like personal or work.",
+					"type": "object",
+					"additionalProperties": { "type": "string" }
+				},
+				"summary": {
+					"description": "A 2-3 sentence biography of the subject",
+					"type": "string"
+				},
+				"location": { "$ref": "#/definitions/Location" },
+				"websites": {
+					"description":"A collection of URLs, with the key as the label (e.g. blog, homepage, work)",
+					"type": "object",
+					"patternProperties": { "type": "string", "format": "uri" }
+				},
+				"profiles": {
+					"description": "Specify any number of social networks that you participate in. (key: handle)",
+					"patternProperties": { "type": "string" }
+				}
+			}
+		},
+		"Location": {
+			"description": "A city, region/state, country location",
+			"type": "object",
+			"properties": {
+				"city": { "type": "string" },
+				"countryCode": { "type": "string" },
+				"region": { "type": "string" },
+				"state": { "type": "string" }
+			}
+		},
+		"WorkExperience": {
+			"description": "An array item describing one work experience",
+			"type": "object",
+			"properties": {
+				"company": { "type": "string" },
+				"position": { "type": "string" },
+				"website": { "type": "string", "format": "uri" },
+				"startDate": { "$ref": "#/definitions/ISODateTime" },
+				"endDate": { "$ref": "#/definitions/ISODateTime" },
+				"summary": { "type": "string" },
+				"highlights":{ 
+					"description": "An array of highlights describing this work experience.",
+					"type": "array",
+					"items": { "type": "string" } 
+				}
+			}
+		},
+		"ISODate": {
+      "description": "ISO 8601 date format string yyyy-MM-dd",
+      "allOf": { "type": "string" },
+      "oneOf": [
+        { "pattern": "^\\d{4}-[01]\\d-[0-3]\\d$" },
+        { "pattern": "^\\d{4}-[01]\\d$" },
+        { "pattern": "^\\d{4}$" }
+      ]
+    },
+    "EducationExperience": {
+			"description": "An array item describing one education experience, such as time spent at a university culminating in a bachelor's degree",
+			"type": "object",
+			"properties": {
+				"institution": { "type": "string" },
+				"area": { "description": "Field of study", "type": "string" },
+				"studyType": { "description": "e.g. High School, Bachelor, B.A., or Master", "type": "string" },
+				"startDate": { "$ref": "#/definitions/ISODate" },
+				"endDate": { "$ref": "#/definitions/ISODate" },
+				"summary": { "type": "string" },
+				"courses":{ 
+					"description": "An array of relevant course highlights.",
+					"type": "array",
+					"items": { "type": "string" } 
+				}
+			}
+		},
+		"Award": {
+			"description": "An array item describing one award or credential",
+			"type": "object",
+			"properties": {
+				"title": { "description": "Name of the award", "type": "string" },
+				"awardDate": { "$ref": "#/definitions/ISODate" },
+				"awarder": { "description": "The name of the person or organization bestowing the award. (e.g. Time Magazine)", "type": "string" }
+			}
+		},
+		"Publication": {
+			"description": "An array item describing one publication by the subject",
+			"type": "object",
+			"properties": {
+				"name": { "description": "Title of the published item", "type": "string" },
+				"publisher": { "description": "Name of the publication or publisher", "type": "string" },
+				"releaseDate": { "$ref": "#/definitions/ISODate" },
+				"website": { 
+					"description": "Web location of the published item (e.g. Amazon product URL or online article URL", 
+					"type": "string",
+					"format": "uri"
+				}
+			}
+		},
+		"Skill": {
+			"description": "An array item describing one skill, the level achieved, and keywords",
+			"name": { "type": "string" },
+			"level": { "description":"e.g. Master", "type": "string" },
+			"keywords": {
+				"description": "List some keywords pertaining to this skill",
+				"type": "array",
+				"items": { "type": "string" }
+			}
+		},
+		"Hobby": {
+			"description": "An array item describing one hobby, and perhaps some related keywords",
+			"name": { "type": "string" },
+			"keywords": {
+				"description": "List some keywords pertaining to this skill",
+				"type": "array",
+				"items": { "type": "string" }
+			}
+		},
+		"Reference": {
+			"description": "An array item describing one reference who offers an endorsement of the author",
+			"type": "object",
+			"name": { "type": "string" },
+			"reference": { 
+				"description": "e.g. Joe was a great employee who turned up to work at least once a week. He exceeded my expectations when it came to doing nothing.",
+				"type": "string" 
+			}
+		}
+	},
+	"type":"object",
+	"properties": {
+		"bio": { "$ref": "#/definitions/Bio" },
+		"work": { "type": "array", "items": { "$ref": "#/definitions/WorkExperience" } },
+		"education": { "type": "array", "items": { "$ref": "#/definitions/EducationExperience" } },
+		"awards": { "type": "array", "items": { "$ref": "#/definitions/Award" } },
+		"publications": { "type": "array", "items": { "$ref": "#/definitions/Publication" } },
+		"skills": { "type": "array", "items": { "$ref": "#/definitions/Skill" } },
+		"hobbies": { "type": "array", "items": { "$ref": "#/definitions/Hobby" } },
+		"references": { "type": "array", "items": { "$ref": "#/definitions/Reference" } }
+	}
+}
